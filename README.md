@@ -7,6 +7,7 @@
 **TASK:**
 
 Diberikan sebuah file excel berisi nama-nama mahasiswa kelas ini beserta NIM nya. App.py berisi code streamlit yang bisa kalian buka dengan cara mengetikan "*streamlit run app.py*" pada terminal pada folder yang sama lalu tekan ENTER. setelah execute command tadi komputer anda akan membuka browser yang akan memiliki tampilan seperti ini:
+<img width="609" height="606" alt="image" src="https://github.com/user-attachments/assets/ac6a1383-dff3-443f-b6f6-1246509c1257" />
 
 
 Tugas anda adalah buat fungsi Insert, Delete, Edit bekerja dengan aturan berikut:
@@ -14,7 +15,7 @@ Tugas anda adalah buat fungsi Insert, Delete, Edit bekerja dengan aturan berikut
 INSERT:
 1. Nim tidak boleh duplikat
 2. Jika Nim sudah ada di excel maka tampilkan "Nim Sudah Ada"
-3. Jika Berhasil Tampilkan kata "Data Sukses di Nasukan"
+3. Jika Berhasil Tampilkan kata "Data Sukses di Masukan"
 
 EDIT:
 1. Data yang akan di edit dipilih berdasarkan Nim
