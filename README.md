@@ -7,6 +7,7 @@
 **TASK:**
 
 Diberikan sebuah file excel berisi nama-nama mahasiswa kelas ini beserta NIM nya. App.py berisi code streamlit yang bisa kalian buka dengan cara mengetikan "*streamlit run app.py*" pada terminal pada folder yang sama lalu tekan ENTER. setelah execute command tadi komputer anda akan membuka browser yang akan memiliki tampilan seperti ini:
+
 <img width="609" height="606" alt="image" src="https://github.com/user-attachments/assets/ac6a1383-dff3-443f-b6f6-1246509c1257" />
 
 
