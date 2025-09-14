@@ -1,33 +1,31 @@
 import streamlit as st
 from DatabaseManager import excelManager
 
-
-
-# # Title
-# st.title("Hello Streamlit 👋")
-
-# # Text
-# st.write("This is my first Streamlit app!")
+# Text
 em = excelManager("dataExcel.xlsx")
 
-# # Input
-nim = st.text_input("Enter NIM:")
-name = st.text_input("Enter Name:")
+
+options = ["Choose Action","Insert", "Edit", "Delete"]
+choice = st.selectbox("Choose an action:", options)
+
+if choice in ("Edit", "Delete"):
+    nim = st.text_input("Enter targeted NIM:", key="targetNim")
+    if (choice == "Delete"):
+        if st.button("Delete"):
+            st.success(em.deleteData(nim))
 
 
-col1, col2= st.columns([0.01, 0.01])  # very small gaps   
-# Button
-with col1:
-    if st.button("Delete"):
-        st.success(em.deleteData([str(nim),str(name)]))
+if (choice in ("Insert","Edit")):
+    newNim = st.text_input("Enter New NIM:",key="newNim")
+    newName = st.text_input("Enter New Name:",key="newName")
 
-with col2:
-    if (st.button("Insert")):
-        st.success(em.insertData([str(nim),str(name)]))
-        
-newNim = st.text_input("Enter new NIM:")
-newName = st.text_input("Enter new Name:")
-if st.button("Edit"):
-    st.success(em.editData([str(nim),str(name)],[str(newNim),str(newName)]))
+    if (choice == "Edit"):
+        if st.button("Edit"):
+            st.success(em.editData(str(nim),[str(newNim),str(newName)]))
+
+    if (choice == "Insert"):    
+        if (st.button("Insert")):
+            st.success(em.insertData([str(newNim),str(newName)]))
+
 
 st.table(em.getDataFrame())
