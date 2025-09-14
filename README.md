@@ -1,11 +1,11 @@
-**UG TABULAR**
+# UG TABULAR
 
 **PERINGATAN:**
 1. Bacalah readme ini dengan seksama sebelum menanyakan pertanyaan pada pengajar/asdos
 2. Bacalah peraturan dan pahami soal dengan seksama
 
 **TASK:**
-Diberikan sebuah file excel berisi nama-nama mahasiswa kelas ini beserta NIM nya. App.py berisi code streamlit yang bisa kalian buka dengan cara mengetikan *streamlit run app.py* pada folder yang sama lalu tekan ENTER. setelah execute command tadi komputer anda akan membuka browser default yang akan memiliki tampilan seperti ini:
+Diberikan sebuah file excel berisi nama-nama mahasiswa kelas ini beserta NIM nya. App.py berisi code streamlit yang bisa kalian buka dengan cara mengetikan "*streamlit run app.py*" pada terminal pada folder yang sama lalu tekan ENTER. setelah execute command tadi komputer anda akan membuka browser yang akan memiliki tampilan seperti ini:
 
 
 Tugas anda adalah buat fungsi Insert, Delete, Edit bekerja dengan aturan berikut:
