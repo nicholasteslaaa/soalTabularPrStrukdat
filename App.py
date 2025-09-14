@@ -1,10 +1,9 @@
 import streamlit as st
 from DatabaseManager import excelManager
 
-# Text
+
+# === DO NOT CHANGE ANY OF THIS CODE ===
 em = excelManager("dataExcel.xlsx")
-
-
 options = ["Choose Action","Insert", "Edit", "Delete"]
 choice = st.selectbox("Choose an action:", options)
 
@@ -26,6 +25,5 @@ if (choice in ("Insert","Edit")):
     if (choice == "Insert"):    
         if (st.button("Insert")):
             st.success(em.insertData([str(newNim),str(newName)]))
-
-
+            
 st.table(em.getDataFrame())
