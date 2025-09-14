@@ -10,7 +10,7 @@ Diberikan sebuah file excel berisi nama-nama mahasiswa kelas ini beserta NIM nya
 <img width="609" height="606" alt="image" src="https://github.com/user-attachments/assets/ac6a1383-dff3-443f-b6f6-1246509c1257" />
 
 
-Tugas anda adalah buat fungsi Insert, Delete, Edit yang bekerja dengan aturan berikut:
+**Tugas anda adalah buat fungsi Insert, Delete, Edit yang bekerja dengan aturan berikut:**
 
 *Warning: inputfield dan button sudah dibuatkan*
 
