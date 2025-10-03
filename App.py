@@ -11,7 +11,11 @@ if choice in ("Edit", "Delete"):
     nim = st.text_input("Enter targeted NIM:", key="targetNim")
     if (choice == "Delete"):
         if st.button("Delete"):
-            st.success(em.deleteData(nim))
+            status = em.deleteData(nim)
+            if (status["status"] == "success"):
+                st.success()
+            elif (status["status"] == "error"):
+                st.error(status["message"])
 
 
 if (choice in ("Insert","Edit")):
@@ -20,10 +24,26 @@ if (choice in ("Insert","Edit")):
 
     if (choice == "Edit"):
         if st.button("Edit"):
-            st.success(em.editData(str(nim),{"NIM":str(newNim),"Nama":str(newName)}))
+            status = em.editData(str(nim),{"NIM":str(newNim).strip(),"Nama":str(newName).strip()})
+            if (status["status"] == "success"):
+                st.success(status["message"])
+            elif (status["status"] == "error"):
+                st.error(status["message"])
 
     if (choice == "Insert"):    
         if (st.button("Insert")):
-            st.success(em.insertData({"NIM":str(newNim),"Nama":str(newName)}))
-        
-st.table(em.getDataFrame())
+            status = em.insertData({"NIM":str(newNim).strip(),"Nama":str(newName).strip()})
+            if (status["status"] == "success"):
+                st.success(status["message"])
+            elif (status["status"] == "error"):
+                st.error(status["message"])
+            
+# soal app: 
+sortOption = ["Default"]
+sortOption.extend(em.getDataFrame().columns)
+choice = st.selectbox("Sort Table By",sortOption )
+if (choice == "Default"):
+    st.table(em.getDataFrame())
+else:
+    ascending = st.checkbox("Sort Ascending", value=True)
+    st.table(em.getDataFrame().sort_values(choice,ascending=ascending))

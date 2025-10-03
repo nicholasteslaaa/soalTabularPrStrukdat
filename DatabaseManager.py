@@ -12,101 +12,81 @@ import pandas
 
 class excelManager:
     def __init__(self,filePath:str,sheetName:str="Sheet1"):
-        self.__filePath = filePath
-        self.__sheetName = sheetName
         self.__data = pandas.read_excel(filePath,sheet_name=sheetName)
             
     
-    def insertData(self,newData:dict):
+    def insertData(self,newData:dict): 
         columnn = self.__data.columns
         new_row = {}
         
         checkIfExist = self.getData("NIM",newData["NIM"])
-        if (checkIfExist): return "Nim Already Exist"
-        
-        # for col,newValue in zip(columnn,newData):
-        #     new_row.update({col:newValue})
+        if (checkIfExist): return {"status":"error","message":"Nim already exist"}
             
         for newValue in newData:
             for col in columnn:
-                print(newValue,col)
-                if (newValue == col):
+                if (str(newValue).lower() == str(col).lower()):
                     new_row.update({col:newData[newValue]})
                     break
         
         # Append row
         self.__data = pandas.concat([self.__data, pandas.DataFrame([new_row])], ignore_index=True)
         
-        self.saveChanges()
-        
-        return "Inserted"
+        return {"status":"success","message":"inserted"}
     
     
     def deleteData(self, targetedNim:str):
         target = self.getData("NIM",targetedNim)
         
-        if (not target): return "Nim Not Found"
+        if (not target): return {"status":"error","message":"Nim Not Found"}
         
         self.__data.drop(target["Row"], inplace=True)
-        self.saveChanges()
         
-        return "Deleted"
+        return {"status":"success","message":"Deleted"}
             
     
-    def editData(self, targetedNim:str, newData:dict):
+    def editData(self, targetedNim:str, newData:dict) -> dict:
         targetData = self.getData("NIM",targetedNim)
+        checkNewNim = self.getData("NIM",newData["NIM"])
         
-        
-        if (not targetData): return "Nim Not Found"
-        
-        # for colName,inputKey in zip(self.__data.columns,newData):
-        #     if (colName == inputKey):
-        #         self.__data.at[targetData["Row"],colName] = newData[inputKey]
-        
+        if (not targetData): return {"status":"error","message":"Nim Not Found"}
+        if (checkNewNim): return {"status":"error","message":f"Nim {newData['NIM']} already exist"}
+    
         for inputKey in newData:
             for colName in self.__data.columns:
-                print(inputKey,colName)
-                if (inputKey == colName):
+                if (str(inputKey).lower() == str(colName).lower()):
                     self.__data.at[targetData["Row"],colName] = newData[inputKey]
                     break
-            
-        self.saveChanges()
         
-        return "Edited"
+        return {"status":"success","message":"edited"}
     
-    def saveChanges(self):
-        self.__data.to_excel(self.__filePath, sheet_name=self.__sheetName, index=False)                    
-        return
-        
- 
                     
     def getData(self, colName:str, data:str) -> dict:
-        collumn = self.__data.columns
-        collumnIndex = [i for i in range(len(collumn)) if (collumn[i].lower().strip() == colName.lower().strip())]
-        print(collumnIndex)
+        collumn = self.__data.columns # mendapatkan list dari nama kolom tabel
+        
+        # cari index dari nama kolom dan menjaganya dari typo atau spasi berlebih
+        collumnIndex = [i for i in range(len(collumn)) if (collumn[i].lower().strip() == colName.lower().strip())] 
         
         # validasi jika input kolom tidak ada pada data excel
         if (len(collumnIndex) != 1): return None
         
+        # nama kolom yang sudah pasti benar dan ada
         colName = collumn[collumnIndex[0]]
         
-        resultDict = dict()
-        for i in self.__data.index:
-            cellData = str(self.__data.at[i,colName])
-            if (cellData == data):
-                for col in collumn:
-                    resultDict.update({str(col):str(self.__data.at[i,col])})
-                resultDict.update({"Row":i})
-                return resultDict
+        
+        resultDict = dict() # tempat untuk hasil
+        
+        for i in self.__data.index: # perulangan ke baris tabel
+            cellData = str(self.__data.at[i,colName]) # isi tabel yand dijadikan str
+            if (cellData == data): # jika data cell sama dengan data input
+                for col in collumn: # perulangan ke nama-nama kolom
+                    resultDict.update({str(col):str(self.__data.at[i,col])}) # masukan data {namaKolom : data pada cell} ke resultDict
+                resultDict.update({"Row":i}) # tambahkan row nya pada resultDict
+                return resultDict # kembalikan resultDict
         
         return None
     
     def getDataFrame(self):
         return self.__data
     
-if __name__ == "__main__":
-    excelReader = excelManager("dataExcel.xlsx")
-    # excelReader.editData("71231014",{"NIM":3,"Nama":"3"})
-    excelReader.insertData({"NIM":7,"Nama":"7"})
-    print(excelReader.getDataFrame().head(100))
-    
+    def getSortedDataFrame(self):
+        return self.getDataFrame().sort_values(by="NIM")
