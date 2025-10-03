@@ -27,7 +27,7 @@ test_cases = {
             {"testcase": "00000000", "expectedResult": "error"},
             {"testcase": "abcdef", "expectedResult": "error"},
             {"testcase": "", "expectedResult": "error"},
-            {"testcase": "71231010", "expectedResult": "success"}
+            {"testcase": "71190510", "expectedResult": "success"}
         ]
     },
 
@@ -88,11 +88,14 @@ for testCase in test_cases["insertData"]["newData"]:
     df.insertData(testCase["testcase"])["status"]
 
 for testCase in test_cases["deleteData"]["targetedNim"]:
+    if (testCase["expectedResult"] == "success"): beforeDelete = df.getData("NIM",testCase["testcase"]); 
+    
     output = df.deleteData(testCase["testcase"])
-    if not df.getData("NIM",testCase["testcase"]):
+    
+    if beforeDelete and not df.getData("NIM",testCase["testcase"]):
         nilai["benar"] += 1
     else:
+        print(testCase,output)
         nilai["salah"] += 1
-    
-print(df.getDataFrame().head(100))
+
 print(nilai)
