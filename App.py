@@ -20,10 +20,10 @@ if (choice in ("Insert","Edit")):
 
     if (choice == "Edit"):
         if st.button("Edit"):
-            st.success(em.editData(str(nim),[str(newNim),str(newName)]))
+            st.success(em.editData(str(nim),{"NIM":str(newNim),"Nama":str(newName)}))
 
     if (choice == "Insert"):    
         if (st.button("Insert")):
-            st.success(em.insertData([str(newNim),str(newName)]))
-            
+            st.success(em.insertData({"NIM":str(newNim),"Nama":str(newName)}))
+        
 st.table(em.getDataFrame())

@@ -11,24 +11,28 @@ import pandas
 # GOODLUCK :)
 
 class excelManager:
-    def __init__(self,filePath:str,sheetName:str=None):
+    def __init__(self,filePath:str,sheetName:str="Sheet1"):
         self.__filePath = filePath
         self.__sheetName = sheetName
-        if sheetName != None:
-            self.__data = pandas.read_excel(filePath,sheet_name=sheetName)
-        else:
-            self.__data = pandas.read_excel(filePath)
+        self.__data = pandas.read_excel(filePath,sheet_name=sheetName)
             
     
-    def insertData(self,newData:list[str]):
+    def insertData(self,newData:dict):
         columnn = self.__data.columns
         new_row = {}
         
-        checkIfExist = self.getData("NIM",newData[0])
+        checkIfExist = self.getData("NIM",newData["NIM"])
         if (checkIfExist): return "Nim Already Exist"
         
-        for col,newValue in zip(columnn,newData):
-            new_row.update({col:newValue})
+        # for col,newValue in zip(columnn,newData):
+        #     new_row.update({col:newValue})
+            
+        for newValue in newData:
+            for col in columnn:
+                print(newValue,col)
+                if (newValue == col):
+                    new_row.update({col:newData[newValue]})
+                    break
         
         # Append row
         self.__data = pandas.concat([self.__data, pandas.DataFrame([new_row])], ignore_index=True)
@@ -49,23 +53,29 @@ class excelManager:
         return "Deleted"
             
     
-    def editData(self, targetedNim:str, newData:list[str]):
+    def editData(self, targetedNim:str, newData:dict):
         targetData = self.getData("NIM",targetedNim)
+        
         
         if (not targetData): return "Nim Not Found"
         
-        for colName,newValue in zip(self.__data.columns,newData):
-            self.__data.at[targetData["Row"],colName] = newValue
+        # for colName,inputKey in zip(self.__data.columns,newData):
+        #     if (colName == inputKey):
+        #         self.__data.at[targetData["Row"],colName] = newData[inputKey]
         
+        for inputKey in newData:
+            for colName in self.__data.columns:
+                print(inputKey,colName)
+                if (inputKey == colName):
+                    self.__data.at[targetData["Row"],colName] = newData[inputKey]
+                    break
+            
         self.saveChanges()
         
         return "Edited"
     
     def saveChanges(self):
-        if (self.__sheetName == None):
-            self.__data.to_excel(self.__filePath, index=False)
-        else:
-            self.__data.to_excel(self.__filePath, sheet_name=self.__sheetName, index=False)                    
+        self.__data.to_excel(self.__filePath, sheet_name=self.__sheetName, index=False)                    
         return
         
  
@@ -73,8 +83,9 @@ class excelManager:
     def getData(self, colName:str, data:str) -> dict:
         collumn = self.__data.columns
         collumnIndex = [i for i in range(len(collumn)) if (collumn[i].lower().strip() == colName.lower().strip())]
+        print(collumnIndex)
         
-        # validasi jika input tidak ada pada data excel
+        # validasi jika input kolom tidak ada pada data excel
         if (len(collumnIndex) != 1): return None
         
         colName = collumn[collumnIndex[0]]
@@ -92,3 +103,10 @@ class excelManager:
     
     def getDataFrame(self):
         return self.__data
+    
+if __name__ == "__main__":
+    excelReader = excelManager("dataExcel.xlsx")
+    # excelReader.editData("71231014",{"NIM":3,"Nama":"3"})
+    excelReader.insertData({"NIM":6,"Nama":"6"})
+    print(excelReader.getDataFrame().head(100))
+    
