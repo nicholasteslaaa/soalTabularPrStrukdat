@@ -107,6 +107,6 @@ class excelManager:
 if __name__ == "__main__":
     excelReader = excelManager("dataExcel.xlsx")
     # excelReader.editData("71231014",{"NIM":3,"Nama":"3"})
-    excelReader.insertData({"NIM":6,"Nama":"6"})
+    excelReader.insertData({"NIM":7,"Nama":"7"})
     print(excelReader.getDataFrame().head(100))
     
