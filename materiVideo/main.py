@@ -1,8 +1,9 @@
 import pandas as pd
+from datetime import datetime
 
-class minimarket:
-    def __init__(self):
-        self.df = pd.read_excel("materiVideo/dataBarangMinimarket.xlsx")
+class excelManager:
+    def __init__(self,path:str):
+        self.df = pd.read_excel(path)
         
     def insertData(self,newData:dict):
         collumn = self.df.columns
@@ -35,10 +36,8 @@ class minimarket:
         
     def editData(self,targetedId:str, newData:dict) -> dict:
         targetData = self.getData("ID",targetedId)
-        checkNewNim = self.getData("ID",newData["ID"])
         
         if (not targetData): return {"status":"error","message":"Nim Not Found"}
-        if (checkNewNim): return {"status":"error","message":f"Nim {newData['NIM']} already exist"}
 
         for inputKey in newData:
             for colName in self.df.columns:
@@ -75,8 +74,27 @@ class minimarket:
 
 
 
-m = minimarket()
-m.insertData({'ID': '101', 'Nama': 'Saori Saus Tiram', 'Perusahaan Asal': 'Wings', 'Kategori': 'Bumbu Dapur', 'Harga': 40020, 'Row': 0})
-# print(getData("ID","101"))
-m.df.sort_values(by="Harga",ascending=False)
-print(m.df.head(200))
+dataBarang = excelManager("materiVideo/dataBarangMinimarket.xlsx")
+dataPenjualan = excelManager("materiVideo/dataPenjualanMinimarket.xlsx")
+
+print(dataPenjualan.df.columns)
+print(dataBarang.df.head())
+def jual(idBarang,jumlahBarang):
+    data = dataBarang.getData("ID",idBarang)
+    print(data)
+    
+    if (data == None): return f"ID: {idBarang} tidak di temukan"
+    if (int(data["Stok"])-jumlahBarang < 0): return "jumlah barang melebihi stok barang"
+        
+    dataPenjualan.insertData({"ID" : data["ID"],"Kategori":data["Kategori"],"Harga":data["Harga"],"Waktu":datetime.now(),"Jumlah barang":jumlahBarang,"Total":float(data["Harga"])*jumlahBarang})
+    # print(float(data["Stok"])-jumlahBarang)
+    dataBarang.editData(idBarang,{"ID":data["ID"],"Nama":data["Nama"],"Perusahaan Asal":data["Perusahaan Asal"],"Kategori":data["Kategori"],"Harga":data["Harga"],"Stok":int(data["Stok"])-jumlahBarang})
+
+jual("8885193814391",140)
+print(dataPenjualan.df.head()) 
+print(dataBarang.df.head())
+
+# m.insertData({'ID': '101', 'Nama': 'Saori Saus Tiram', 'Perusahaan Asal': 'Wings', 'Kategori': 'Bumbu Dapur', 'Harga': 40020, 'Row': 0})
+# # print(getData("ID","101"))
+# m.df.sort_values(by="Harga",ascending=False)
+# print(m.df.head(200))
