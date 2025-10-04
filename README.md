@@ -15,7 +15,6 @@ INSERT:
 3.	Jika Berhasil Tampilkan kata "Data Sukses di Masukan"
 
 
-
 EDIT:
 1.	Data yang akan di edit dipilih berdasarkan Nim
 2.	Jika Nim tidak ada di excel maka tampilkan "Nim tidak ditemukan"

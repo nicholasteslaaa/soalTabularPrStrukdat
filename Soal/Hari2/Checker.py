@@ -93,7 +93,6 @@ for testCase in test_cases["deleteData"]["targetedNim"]:
     output = df.deleteData(testCase["testcase"])
     
     if beforeDelete and not df.getData("NIM",testCase["testcase"]):
-        if(e)
         nilai["benar"] += 1
     else:
         print(testCase,output)
