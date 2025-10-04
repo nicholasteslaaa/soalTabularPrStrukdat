@@ -1,47 +1,88 @@
-# UG TABULAR
-**PERINGATAN:**
-1.	Bacalah peraturan dan pahami soal dengan seksama sebelum mengerjakan
-LATAR BELAKANG:
-Anda Adalah mahasiswa UKDW yang mendapatkan tugas untuk membuat sistem pendataan mahasiswa.
+Tentu, ini adalah draf `README.md` untuk repositori GitHub Anda berdasarkan instruksi yang diberikan.
 
-**TASK:**
-Diberikan sebuah file excel berisi nama-nama mahasiswa kelas ini beserta NIM nya. App.py berisi code streamlit yang bisa kalian buka dengan cara mengetikan "streamlit run app.py" pada terminal pada folder yang sama lalu tekan ENTER. setelah execute command tadi komputer anda akan membuka browser yang akan memiliki tampilan seperti ini:
-**Tugas anda adalah buat fungsi Insert, Delete, Edit yang bekerja dengan aturan berikut:**
-*Warning: inputfield, selectbox dan button streamlit sudah dibuatkan*
+-----
 
-INSERT:
-1.	Nim tidak boleh duplikat
-2.	Jika Nim sudah ada di excel maka tampilkan "Nim Sudah Ada"
-3.	Jika Berhasil Tampilkan kata "Data Sukses di Masukan"
+# UG TABULAR: Sistem Pendataan Mahasiswa
 
+Proyek ini adalah tugas untuk membuat sistem pendataan mahasiswa sederhana menggunakan **Streamlit**. Anda berperan sebagai mahasiswa UKDW yang ditugaskan untuk mengimplementasikan fungsionalitas dasar CRUD (Create, Read, Update, Delete) dan pengurutan data yang bersumber dari file Excel.
 
-EDIT:
-1.	Data yang akan di edit dipilih berdasarkan Nim
-2.	Jika Nim tidak ada di excel maka tampilkan "Nim tidak ditemukan"
-3.	Data akan di ubah berdasarkan value pada input field New Nim dan New Name
-4.	Jika Berhasil Tampilkan kata "Data Sukses di Edit"
-DELETE:
-1.	Data yang akan di edit dipilih berdasarkan Nim
-2.	Jika Nim tidak ada di excel maka tampilkan "Nim tidak ditemukan"
-3.	Jika Berhasil Tampilkan kata "Data Sukses di Hapus"
-SORT:
-1.	Tampilan tabel pada streamlit dapat di urutkan berdasarkan kolom yang dipilih melalui selectbox
+## 🚀 Fitur
 
-RULES:
-1.	JANGAN GANTI NAMA CLASS ATAU FUNGSI YANG ADA
-2.	JANGAN DELETE FUNGSI YANG ADA
-3.	JANGAN DELETE ATAU MENAMBAH PARAMETER PADA CONSTRUCTOR ATAU FUNGSI
-4.	GANTI NAMA PARAMETER DI PERBOLEHKAN
-5.	LARANGAN DI ATAS BOLEH DILANGGAR JIKA ANDA TAU APA YANG ANDA LAKUKAN (WAJIB BISA JELASKAN)
+  - **➕ Insert Data**: Menambahkan data mahasiswa baru dengan validasi NIM duplikat.
+  - **✏️ Edit Data**: Mengubah data mahasiswa yang sudah ada berdasarkan NIM.
+  - **❌ Delete Data**: Menghapus data mahasiswa berdasarkan NIM.
+  - **📊 Sort Data**: Mengurutkan tabel data secara dinamis berdasarkan kolom yang dipilih.
+  - **🖥️ Interface**: Tampilan antarmuka pengguna yang interaktif dibangun dengan Streamlit.
 
-PENILAIAN:
-1.	Insert berfungsi dengan baik: 25%
-2.	Edit berfungsi dengan baik: 30%
-3.	Delete berfungsi dengan baik: 25%
-4.	Sort table berfungsi dengan baik: 10%
-5.	Dapat di gunakan dengan streamlit: 10%
+-----
 
-CATATAN:
- 
+## 🛠️ Cara Menjalankan Aplikasi
 
-**Goodluck :)**
+1.  **Pastikan Anda memiliki Python dan library yang dibutuhkan.** Jika belum, install library yang diperlukan:
+
+    ```bash
+    pip install streamlit pandas openpyxl
+    ```
+
+2.  **Buka terminal atau command prompt** pada direktori utama proyek (folder yang berisi file `app.py`).
+
+3.  **Jalankan perintah berikut:**
+
+    ```bash
+    streamlit run app.py
+    ```
+
+    Setelah perintah dieksekusi, aplikasi akan otomatis terbuka di browser Anda.
+
+-----
+
+## 📝 Detail Tugas
+
+Anda diminta untuk melengkapi fungsi `Insert`, `Edit`, `Delete`, dan `Sort` pada file `app.py`. Komponen antarmuka seperti *input field*, *selectbox*, dan *button* sudah disediakan.
+
+### ➕ Fungsi `Insert`
+
+  - NIM tidak boleh duplikat.
+  - Jika NIM yang diinput sudah ada di dalam file Excel, tampilkan pesan: **"Nim Sudah Ada"**.
+  - Jika data berhasil ditambahkan, tampilkan pesan: **"Data Sukses di Masukan"**.
+
+### ✏️ Fungsi `Edit`
+
+  - Data yang akan diubah dipilih berdasarkan **NIM**.
+  - Jika NIM yang dituju tidak ada di dalam file Excel, tampilkan pesan: **"Nim tidak ditemukan"**.
+  - Data akan diubah sesuai dengan nilai yang diinput pada field `New Nim` dan `New Name`.
+  - Jika data berhasil diubah, tampilkan pesan: **"Data Sukses di Edit"**.
+
+### ❌ Fungsi `Delete`
+
+  - Data yang akan dihapus dipilih berdasarkan **NIM**.
+  - Jika NIM yang dituju tidak ada di dalam file Excel, tampilkan pesan: **"Nim tidak ditemukan"**.
+  - Jika data berhasil dihapus, tampilkan pesan: **"Data Sukses di Hapus"**.
+
+### 📊 Fungsi `Sort`
+
+  - Tabel data yang ditampilkan pada antarmuka Streamlit harus dapat diurutkan berdasarkan kolom yang dipilih melalui `selectbox`.
+
+-----
+
+## 📜 Aturan Pengerjaan
+
+Mohon patuhi aturan berikut selama pengerjaan:
+
+1.  **JANGAN** mengganti nama `class` atau fungsi yang sudah ada.
+2.  **JANGAN** menghapus fungsi yang sudah ada.
+3.  **JANGAN** menghapus atau menambah parameter pada `constructor` atau fungsi.
+4.  Mengganti nama parameter **DIPERBOLEHKAN**.
+5.  **Peringatan**: Aturan di atas boleh dilanggar hanya jika Anda memahami sepenuhnya konsekuensinya dan wajib bisa menjelaskannya.
+
+-----
+
+## 💯 Kriteria Penilaian
+
+  - **Fungsi Insert berjalan baik**: `25%`
+  - **Fungsi Edit berjalan baik**: `30%`
+  - **Fungsi Delete berjalan baik**: `25%`
+  - **Fungsi Sort Table berjalan baik**: `10%`
+  - **Aplikasi dapat digunakan dengan Streamlit**: `10%`
+
+**Good luck\! ✨**
