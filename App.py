@@ -13,7 +13,7 @@ if choice in ("Edit", "Delete"):
         if st.button("Delete"):
             status = em.deleteData(nim)
             if (status["status"] == "success"):
-                st.success()
+                st.success(status["message"])
             elif (status["status"] == "error"):
                 st.error(status["message"])
 
@@ -41,6 +41,7 @@ if (choice in ("Insert","Edit")):
 # soal app: 
 sortOption = ["Default"]
 sortOption.extend(em.getDataFrame().columns)
+
 choice = st.selectbox("Sort Table By",sortOption )
 if (choice == "Default"):
     st.table(em.getDataFrame())

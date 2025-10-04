@@ -87,6 +87,3 @@ class excelManager:
     
     def getDataFrame(self):
         return self.__data
-    
-    def getSortedDataFrame(self):
-        return self.getDataFrame().sort_values(by="NIM")
