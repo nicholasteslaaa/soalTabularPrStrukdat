@@ -39,12 +39,14 @@ if (choice in ("Insert","Edit")):
             elif (status["status"] == "error"):
                 st.error(status["message"])
             
-# TODO: buatkan fungsi filter data dan tampilkan pada tabel
-sortOption = ["Default"].extend(em.getDataFrame().columns)
-choice = st.selectbox("Sort Table By",sortOption )
+# TODO: buatkan sistem filter data tabel berdasarkan kolom yang memiliki data angka
+option = ["None",">","<","=","<=",">="]
+filterSelectBox = st.selectbox("opsi filter: ",option)
 
-# if (choice == "Default"):
-#     st.table(em.getDataFrame())
-# else:
-#     ascending = st.checkbox("Sort Ascending", value=True)
-#     st.table(em.getDataFrame().sort_values(choice,ascending=ascending))
+if (filterSelectBox == "None"):
+    st.table(em.getDataFrame())
+else:
+    targetFilterColumn = st.selectbox("target column",["NIM","Nilai"])
+    filter = st.text_input("filter nilai")
+
+# === show the filtered table here ===

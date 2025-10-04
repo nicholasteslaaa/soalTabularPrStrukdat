@@ -48,3 +48,5 @@ if (choice == "Default"):
 else:
     ascending = st.checkbox("Sort Ascending", value=True)
     st.table(em.getDataFrame().sort_values(choice,ascending=ascending))
+
+# === show the sorted table here ===
