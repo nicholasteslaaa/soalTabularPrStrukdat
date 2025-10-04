@@ -10,19 +10,27 @@ import pandas
 
 class excelManager:
     def __init__(self,filePath:str,sheetName:str="Sheet1"):
+        self.__filePath = filePath
+        self.__sheetName = sheetName
         self.__data = pandas.read_excel(filePath,sheet_name=sheetName)
             
     
-    def insertData(self,newData:dict):
+    def insertData(self,newData:dict,saveChange:bool=False):
         # kerjakan disini 
+        
+        if (saveChange): self.saveChange()
         pass
     
-    def deleteData(self, targetedNim:str):
+    def deleteData(self, targetedNim:str,saveChange:bool=False):
         # kerjakan disini
+        
+        if (saveChange): self.saveChange()
         pass
     
-    def editData(self, targetedNim:str, newData:dict) -> dict:
+    def editData(self, targetedNim:str, newData:dict,saveChange:bool=False) -> dict:
         # kerjakan disini
+        
+        if (saveChange): self.saveChange()
         pass
     
                     
@@ -50,6 +58,9 @@ class excelManager:
                 return resultDict # kembalikan resultDict
         
         return None
+    
+    def saveChange(self):
+        self.__data.to_excel(self.__filePath, sheet_name=self.__sheetName , index=False)
     
     def getDataFrame(self):
         return self.__data

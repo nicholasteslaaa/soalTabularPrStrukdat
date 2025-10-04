@@ -10,10 +10,12 @@ import pandas
 
 class excelManager:
     def __init__(self,filePath:str,sheetName:str="Sheet1"):
+        self.__filePath = filePath
+        self.__sheetName = sheetName
         self.__data = pandas.read_excel(filePath,sheet_name=sheetName)
             
     
-    def insertData(self,newData:dict): 
+    def insertData(self,newData:dict,saveChange:bool=False): 
         columnn = self.__data.columns
         new_row = {}
         
@@ -29,32 +31,33 @@ class excelManager:
         # Append row
         self.__data = pandas.concat([self.__data, pandas.DataFrame([new_row])], ignore_index=True)
         
+        if(saveChange):self.saveChange()
+        
         return {"status":"success","message":"inserted"}
     
     
-    def deleteData(self, targetedNim:str):
+    def deleteData(self, targetedNim:str,saveChange:bool=False):
         target = self.getData("NIM",targetedNim)
         
         if (not target): return {"status":"error","message":"Nim Not Found"}
         
         self.__data.drop(target["Row"], inplace=True)
         
+        self.saveChange()
         return {"status":"success","message":"Deleted"}
             
     
-    def editData(self, targetedNim:str, newData:dict) -> dict:
+    def editData(self, targetedNim:str, newData:dict,saveChange:bool=False) -> dict:
         targetData = self.getData("NIM",targetedNim)
-        checkNewNim = self.getData("NIM",newData["NIM"])
         
         if (not targetData): return {"status":"error","message":"Nim Not Found"}
-        if (checkNewNim): return {"status":"error","message":f"Nim {newData['NIM']} already exist"}
     
         for inputKey in newData:
             for colName in self.__data.columns:
                 if (str(inputKey).lower() == str(colName).lower()):
                     self.__data.at[targetData["Row"],colName] = newData[inputKey]
                     break
-        
+        if (saveChange): self.saveChange()
         return {"status":"success","message":"edited"}
     
                     
@@ -82,6 +85,9 @@ class excelManager:
                 return resultDict # kembalikan resultDict
         
         return None
+    
+    def saveChange(self):
+        self.__data.to_excel(self.__filePath, sheet_name=self.__sheetName , index=False)
     
     def getDataFrame(self):
         return self.__data

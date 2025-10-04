@@ -6,12 +6,13 @@ from DatabaseManager import excelManager
 em = excelManager("dataExcel.xlsx")
 options = ["Choose Action","Insert", "Edit", "Delete"]
 choice = st.selectbox("Choose an action:", options)
+saveChange = st.checkbox("SaveChanges",value=False)
 
 if choice in ("Edit", "Delete"):
     nim = st.text_input("Enter targeted NIM:", key="targetNim")
     if (choice == "Delete"):
         if st.button("Delete"):
-            status = em.deleteData(nim)
+            status = em.deleteData(nim,saveChange)
             if (status["status"] == "success"):
                 st.success(status["message"])
             elif (status["status"] == "error"):
@@ -24,7 +25,7 @@ if (choice in ("Insert","Edit")):
 
     if (choice == "Edit"):
         if st.button("Edit"):
-            status = em.editData(str(nim),{"NIM":str(newNim).strip(),"Nama":str(newName).strip()})
+            status = em.editData(str(nim),{"NIM":str(newNim).strip(),"Nama":str(newName).strip()},saveChange)
             if (status["status"] == "success"):
                 st.success(status["message"])
             elif (status["status"] == "error"):
@@ -32,7 +33,7 @@ if (choice in ("Insert","Edit")):
 
     if (choice == "Insert"):    
         if (st.button("Insert")):
-            status = em.insertData({"NIM":str(newNim).strip(),"Nama":str(newName).strip()})
+            status = em.insertData({"NIM":str(newNim).strip(),"Nama":str(newName).strip()},saveChange)
             if (status["status"] == "success"):
                 st.success(status["message"])
             elif (status["status"] == "error"):
