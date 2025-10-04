@@ -1,5 +1,3 @@
-Tentu, ini adalah draf `README.md` untuk repositori GitHub Anda berdasarkan instruksi yang diberikan.
-
 -----
 
 # UG TABULAR: Sistem Pendataan Mahasiswa
