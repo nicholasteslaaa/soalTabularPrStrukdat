@@ -16,14 +16,15 @@ class excelManager:
             
     
     def insertData(self,newData:dict,saveChange:bool=False): 
-        columnn = self.__data.columns
+        column = self.__data.columns
         new_row = {}
-        
+         
         checkIfExist = self.getData("NIM",newData["NIM"])
         if (checkIfExist): return {"status":"error","message":"Nim already exist"}
+        
             
         for newValue in newData:
-            for col in columnn:
+            for col in column:
                 if (str(newValue).lower() == str(col).lower()):
                     new_row.update({col:newData[newValue]})
                     break
@@ -43,7 +44,7 @@ class excelManager:
         
         self.__data.drop(target["Row"], inplace=True)
         
-        self.saveChange()
+        if (saveChange): self.saveChange()
         return {"status":"success","message":"Deleted"}
             
     
@@ -55,7 +56,7 @@ class excelManager:
         for inputKey in newData:
             for colName in self.__data.columns:
                 if (str(inputKey).lower() == str(colName).lower()):
-                    self.__data.at[targetData["Row"],colName] = newData[inputKey]
+                    self.__data.at[targetData["Row"],colName] = str(newData[inputKey])
                     break
         if (saveChange): self.saveChange()
         return {"status":"success","message":"edited"}

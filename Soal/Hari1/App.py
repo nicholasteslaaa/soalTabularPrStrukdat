@@ -39,12 +39,12 @@ if (choice in ("Insert","Edit")):
             elif (status["status"] == "error"):
                 st.error(status["message"])
             
-# TODO: buatkan pilihan sort data tabel berdasarkan kolom
+# TODO: buatkan fungsi filter data dan tampilkan pada tabel
 sortOption = ["Default"].extend(em.getDataFrame().columns)
 choice = st.selectbox("Sort Table By",sortOption )
 
-if (choice == "Default"):
-    st.table(em.getDataFrame())
-else:
-    ascending = st.checkbox("Sort Ascending", value=True)
-    st.table(em.getDataFrame().sort_values(choice,ascending=ascending))
+# if (choice == "Default"):
+#     st.table(em.getDataFrame())
+# else:
+#     ascending = st.checkbox("Sort Ascending", value=True)
+#     st.table(em.getDataFrame().sort_values(choice,ascending=ascending))

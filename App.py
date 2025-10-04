@@ -22,22 +22,31 @@ if choice in ("Edit", "Delete"):
 if (choice in ("Insert","Edit")):
     newNim = st.text_input("Enter New NIM:",key="newNim")
     newName = st.text_input("Enter New Name:",key="newName")
+    newGrade = st.text_input("Enter New Grade :", key="targetNim")
 
     if (choice == "Edit"):
         if st.button("Edit"):
-            status = em.editData(str(nim),{"NIM":str(newNim).strip(),"Nama":str(newName).strip()},saveChange)
-            if (status["status"] == "success"):
-                st.success(status["message"])
-            elif (status["status"] == "error"):
-                st.error(status["message"])
+            if (sum([1 for i in newNim if str(i).isalpha()]) > 0): st.error("Input nim harus angka semua")
+            elif (sum([1 for i in newName if str(i).isdigit()]) > 0): st.error("Input nama harus Alphabet semua")
+            elif (sum([1 for i in newGrade if str(i).isalpha()]) > 0): st.error("Input nilai harus angka semua")
+            else:
+                status = em.editData(str(nim),{"NIM":str(newNim).strip(),"Nama":str(newName).strip(),"Nilai":int(newGrade.strip())},saveChange)
+                if (status["status"] == "success"):
+                    st.success(status["message"])
+                elif (status["status"] == "error"):
+                    st.error(status["message"])
 
     if (choice == "Insert"):    
         if (st.button("Insert")):
-            status = em.insertData({"NIM":str(newNim).strip(),"Nama":str(newName).strip()},saveChange)
-            if (status["status"] == "success"):
-                st.success(status["message"])
-            elif (status["status"] == "error"):
-                st.error(status["message"])
+            if (sum([1 for i in newNim if str(i).isalpha()]) > 0): st.error("Input nim harus angka semua")
+            elif (sum([1 for i in newName if str(i).isdigit()]) > 0): st.error("Input nama harus Alphabet semua")
+            elif (sum([1 for i in newGrade if str(i).isalpha()]) > 0): st.error("Input nilai harus angka semua")
+            else:
+                status = em.insertData({"NIM":str(newNim).strip(),"Nama":str(newName).strip(),"Nilai":int(newGrade.strip())},saveChange)
+                if (status["status"] == "success"):
+                    st.success(status["message"])
+                elif (status["status"] == "error"):
+                    st.error(status["message"])
             
 # TODO: buatkan pilihan sort data tabel berdasarkan kolom
 sortOption = ["Default"]

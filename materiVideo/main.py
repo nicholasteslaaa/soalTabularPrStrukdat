@@ -93,6 +93,7 @@ def jual(idBarang,jumlahBarang):
     dataPenjualan.saveChange()
     dataBarang.editData(idBarang,{"ID":data["ID"],"Nama":data["Nama"],"Perusahaan Asal":data["Perusahaan Asal"],"Kategori":data["Kategori"],"Harga":data["Harga"],"Stok":int(data["Stok"])-jumlahBarang})
 
+
 def restock():
     pass
 
