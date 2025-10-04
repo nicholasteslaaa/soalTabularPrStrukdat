@@ -39,7 +39,7 @@ test_cases = {
             {"testcase": {"targetedNim": "71231004", "newData": {"NIM":115, "Nama": "Dewi Edited"}}, "expectedResult": "success"},
             {"testcase": {"targetedNim": "71231005", "newData": {"NIM":116, "Nama": "Eka Updated"}}, "expectedResult": "success"},
             {"testcase": {"targetedNim": "99999999", "newData": {"NIM":113, "Nama": "Ghost"}}, "expectedResult": "error"},
-            {"testcase": {"targetedNim": "00000000", "newData": {"NIM":112, "Nama": "Null"}}, "expectedResult": "error"}, #<--
+            {"testcase": {"targetedNim": "00000000", "newData": {"NIM":112, "Nama": "Null"}}, "expectedResult": "error"},
             {"testcase": {"targetedNim": "71231006", "newData": {"NIM":117, "Nama": "Fajar Modified"}}, "expectedResult": "success"},
             {"testcase": {"targetedNim": "71231007", "newData": {"NIM":118, "Nama": "Gilang Changed"}}, "expectedResult": "success"},
             {"testcase": {"targetedNim": "71231008", "newData": {"NIM":119, "Nama": "Hana Fixed"}}, "expectedResult": "success"}
@@ -93,6 +93,7 @@ for testCase in test_cases["deleteData"]["targetedNim"]:
     output = df.deleteData(testCase["testcase"])
     
     if beforeDelete and not df.getData("NIM",testCase["testcase"]):
+        if(e)
         nilai["benar"] += 1
     else:
         print(testCase,output)

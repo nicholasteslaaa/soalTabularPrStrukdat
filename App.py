@@ -38,7 +38,7 @@ if (choice in ("Insert","Edit")):
             elif (status["status"] == "error"):
                 st.error(status["message"])
             
-# soal app: 
+# TODO: buatkan pilihan sort data tabel berdasarkan kolom
 sortOption = ["Default"]
 sortOption.extend(em.getDataFrame().columns)
 
