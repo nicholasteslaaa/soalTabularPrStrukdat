@@ -16,20 +16,23 @@ class excelManager:
             
     
     def insertData(self,newData:dict,saveChange:bool=False):
-        # kerjakan disini 
+        # kerjakan disini
+        # clue cara insert row: df = pandas.concat([df, pandas.DataFrame([{"ID":0,"Nama":"Udin"}])], ignore_index=True)
         
         if (saveChange): self.saveChange()
         pass
     
     def deleteData(self, targetedNim:str,saveChange:bool=False):
         # kerjakan disini
+        # clue cara delete row: df.drop(indexBaris, inplace=True); contoh: df.drop(0,inplace=True)
+        
         
         if (saveChange): self.saveChange()
         pass
     
     def editData(self, targetedNim:str, newData:dict,saveChange:bool=False) -> dict:
         # kerjakan disini
-        
+        # clue cara ganti value: df.at[indexBaris,namaKolom] = value; contoh: df.at[0,ID] = 1
         if (saveChange): self.saveChange()
         pass
     
