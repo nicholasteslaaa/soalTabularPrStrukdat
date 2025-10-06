@@ -17,7 +17,7 @@ class excelManager:
     
     def insertData(self,newData:dict,saveChange:bool=False):
         # kerjakan disini
-        # clue cara insert row: df = pandas.concat([df, pandas.DataFrame([{"ID":0,"Nama":"Udin"}])], ignore_index=True)
+        # clue cara insert row: df = pandas.concat([df, pandas.DataFrame([{"NIM":0,"Nama":"Udin","Nilai":1000}])], ignore_index=True)
         
         if (saveChange): self.saveChange()
         pass
