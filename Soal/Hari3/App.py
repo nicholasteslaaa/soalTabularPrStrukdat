@@ -12,8 +12,10 @@ if choice in ("Edit", "Delete"):
     if (choice == "Delete"):
         if (sum([1 for i in nim if str(i).isalpha()]) > 0): st.error("Input nim harus angka semua")
         elif st.button("Delete"):
-            em.deleteData(nim,saveChange)
-            if (not em.getData("NIM",nim)): st.success("deleted")
+            if (not em.getData("NIM",nim)): st.error("nim not found")
+            else:
+                em.deleteData(nim,saveChange)
+                if (not em.getData("NIM",nim)): st.success("deleted")
             
 
 if (choice in ("Insert","Edit")):
