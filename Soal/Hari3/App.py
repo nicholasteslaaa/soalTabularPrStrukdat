@@ -55,7 +55,10 @@ if (filterSelectBox == "None"):
     st.table(em.getDataFrame()) # tabel biasa
 else:
     targetFilterColumn = st.selectbox("target column",["NIM","Nilai"]) # pilihan kolom
-    filter = st.text_input("filter nilai") # 
+    filter = st.text_input("filter nilai") # input angka filter
 
-# === show the filtered table here ===
-# clue: cara filter ada di modul
+if (filter != ""):
+    if (filterSelectBox == ">"):
+        st.table(em.getDataFrame()[em.getDataFrame()[targetFilterColumn] > int(filter)]) # cara filter
+    # TODO: lanjutkan code di atas
+    # note: cara filter ada di modul

@@ -51,5 +51,12 @@ if (choice in ("Insert","Edit")):
 # TODO: buatkan pilihan sort data tabel berdasarkan kolom
 sortOption = ["Default"].extend(em.getDataFrame().columns) # ini opsinya
 choice = st.selectbox("Sort Table By",sortOption ) # ini selectbox nya
-# TODO: tampilkan tabel berdasarkan pilihan di selectbox 
+
+if (choice == "Default"):
+    st.table(em.getDataFrame())
+else:
+    ascending = st.checkbox("Sort Ascending", value=True)
+    # TODO: tampilkan tabel berdasarkan pilihan di selectbox dan gunakan checkbox apakah ascending atau tidak
+    # clue: cara sort ada di modul
+
 
