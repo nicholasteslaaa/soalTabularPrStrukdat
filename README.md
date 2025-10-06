@@ -43,6 +43,7 @@ Anda diminta untuk melengkapi fungsi `Insert`, `Edit`, `Delete`, dan `Sort` pada
   - NIM tidak boleh duplikat.
   - Jika NIM yang diinput sudah ada di dalam file Excel, tampilkan pesan: **"Nim Sudah Ada"**.
   - Jika data berhasil ditambahkan, tampilkan pesan: **"Data Sukses di Masukan"**.
+  - Nama tidak boleh angka.
 
 ### ✏️ Fungsi `Edit`
 
@@ -50,6 +51,7 @@ Anda diminta untuk melengkapi fungsi `Insert`, `Edit`, `Delete`, dan `Sort` pada
   - Jika NIM yang dituju tidak ada di dalam file Excel, tampilkan pesan: **"Nim tidak ditemukan"**.
   - Data akan diubah sesuai dengan nilai yang diinput pada field `New Nim` dan `New Name`.
   - Jika data berhasil diubah, tampilkan pesan: **"Data Sukses di Edit"**.
+  - Nama tidak boleh angka
 
 ### ❌ Fungsi `Delete`
 
